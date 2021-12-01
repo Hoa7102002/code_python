@@ -1,7 +1,9 @@
+def input_x():
+    x=int(input('Input a number to check:'))
+    return x
 
-print('Input a number to check:')
-x=int(input())
-def checkPrime(x):
+
+def check_prime(x):
     tmp=0
     if( x<2):
         return False
@@ -12,6 +14,12 @@ def checkPrime(x):
             if(x%i==0):
                tmp+=1
         if(tmp!=0): return False
-    return True   
-print(checkPrime(x))
+    return True 
+
+
+if __name__ == "__main__":
+    x=input_x()
+    print(check_prime(x))
+
+
     

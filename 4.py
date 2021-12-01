@@ -1,63 +1,52 @@
-def readFileDubaothoitiet():
+def read_file_dubaothoitiet():
     data=open('dubaothoitiet.txt') #read file dubaothoitiet
     data1=data.read()
     data.close()
     return data1
-print(readFileDubaothoitiet())
 
 
-def readFileKyhieu():
+
+def read_file_kyhieu():
     data=open('kyhieu.txt') #read file kyhieu
     data1=data.read()
     data.close()
-    return data
-print(readFileKyhieu())
+    return data1
 
-def weatherForecast():
-    data=open('dubaothoitiet.txt') #read file dubaothoitiet
-    data1=data.read()
-    dat=open('dubaothoitiet.txt')
-    data2=dat.read()
+
+
+def weather_forecast():
+    days=read_file_dubaothoitiet().split("\n") 
+    keys=read_file_kyhieu()
+    keys=keys.strip("\n").split("\n")
+    keys = {
+        key.split(": ")[0]: key.split(": ")[1] for key in keys
+    }
+    forecast = {
+        day.split(":")[0]: keys[day.split(":")[1]] for day in days
+    }
+    days = [day.split(":")[0] for day in days]
     weekdays=[ 'Monday','Tuesday','Wednesday','Thursday', 'Friday', 'Saturday', 'Sunday']
-    Forecast=dict(
-        (key.strip(),value.strip())
-            for key, value in (tmp.split(':')
-                for tmp in data1.split('\n'))
-    )
-  
-    weatherSymbol=dict(
-        (Key.strip(), Value.strip())
-            for Key, Value in (temp.split(':')
-                for temp in data2.split('\n'))
-    )
 
     print("Today:")
     print("ex: Wednesday-11/9/2022")
-    Today=input()
+    today=input()
     print("input the next n days: ")
     n=int(input())
-    while(n<=0): n=int(input())
-    Today=Today.split('-')# :2(day and weekdays)
-    weeks=Today[0]
-    days=Today[1]
-    if(weeks in weekdays and days in Forecast):
-        tmp=list(Forecast)
-        for i in range(1, len(tmp)):
-            if(days==tmp[i]):
-                break
-        for k in range(0, len(weekdays)):
-            if(weeks==weekdays[k]):
-                break
-        for i in range(i, i+n):
-            if(i>=len(tmp)):
-                break
-            print(weekdays[i], end="-")
-            print(tmp[i],end=":")
-            print(weatherSymbol[Forecast[tmp[i]]])
-            k+=1
-            if(k==7): k=0
+    today=today.split('-')# :2(day and weekdays)
+    cur_day=today[0]
+    day=today[1]
+    if(cur_day in weekdays and day in forecast):
+        week_idx = weekdays.index(cur_day)
+        day_idx = days.index(day) + 1
+        print("Weather forecast for the next {0} days".format(n))
+        for i in range(week_idx+1, week_idx+n+1):
+            print(weekdays[i%7], "-", str(days[day_idx])+":", forecast[days[day_idx]])
+            day_idx += 1
     else:
         print("no information")
-    data.close()
-    dat.close()
-print(weatherForecast())
+
+
+if __name__ == "__main__":
+    print(read_file_kyhieu())
+    print(read_file_dubaothoitiet())
+    weather_forecast()
