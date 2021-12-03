@@ -10,9 +10,15 @@ def gcd(a,b):
         tmp=a
         a=b
         b=tmp
-    for i in range(b, 1, -1):
-        if(b%i==0 and a%i==0):
-            return i
+    temp1 = a
+    temp2 = b
+    while (temp1 != temp2):
+        if (temp1 > temp2):
+            temp1 -= temp2
+        else:
+            temp2 -= temp1
+    gcd = temp1
+    return gcd
 
 
 def lcm(a,b):
@@ -28,4 +34,7 @@ def lcm(a,b):
 if __name__ == "__main__":
     a=input_n()
     b=input_n()
-    print(lcm(a,b))
+    lcm=int(lcm(a,b))
+
+    print("The least common multiple of these two numbers is:",end=' ')
+    print(lcm)

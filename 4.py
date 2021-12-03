@@ -25,7 +25,7 @@ def weather_forecast():
         day.split(":")[0]: keys[day.split(":")[1]] for day in days
     }
     days = [day.split(":")[0] for day in days]
-    weekdays=[ 'Monday','Tuesday','Wednesday','Thursday', 'Friday', 'Saturday', 'Sunday']
+    weekdays=( 'Monday','Tuesday','Wednesday','Thursday', 'Friday', 'Saturday', 'Sunday')
 
     print("Today:")
     print("ex: Wednesday-11/9/2022")

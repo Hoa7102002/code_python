@@ -19,7 +19,13 @@ def check_prime(x):
 
 if __name__ == "__main__":
     x=input_x()
-    print(check_prime(x))
+
+    if check_prime(x)==True :
+        print(x,end=' ')
+        print('is a prime number')
+    else:
+        print(x,end=' ')
+        print('is not a prime number')
 
 
     
